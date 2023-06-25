@@ -17,8 +17,8 @@ test.describe("Home page",()=>{
      await expect(page.getByText("Home ")).toBeEnabled();
      await page.getByText("Home ").click();
      await page.goBack();
-     await expect(page.getByText("Contact")).toBeEnabled();
-     await page.getByText("Contact").click();
+     await expect(page.getByText("Contact").nth(3)).toBeEnabled();
+     await page.getByText("Contact").nth(3).click();
      await page.goBack();
 
    })
