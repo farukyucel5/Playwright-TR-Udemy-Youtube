@@ -12,6 +12,16 @@ test.describe("Home page",()=>{
       await expect(page).toHaveURL('https://www.demoblaze.com/');
       
    });
+
+   test('Verify that all the buttons on the navbar are up and running',async({page})=>{
+     await expect(page.getByText("Home ")).toBeEnabled();
+     await page.getByText("Home ").click();
+     await page.goBack();
+     await expect(page.getByText("Contact")).toBeEnabled();
+     await page.getByText("Contact").click();
+     await page.goBack();
+
+   })
    
 
 
