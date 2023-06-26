@@ -1,0 +1,36 @@
+import{test,expect} from '@playwright/test';
+
+test.beforeEach(async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/');
+    let loginLink:string;
+    loginLink = "[id='login2']";//property
+    // await page.locator(loginLink).click();
+    await page.click(loginLink);
+});
+
+test.describe("Login",()=>{
+
+  test('user shoud log in the system with a right credentials',async({page})=>{
+    let usernameLocate : string;
+    usernameLocate="#loginusername" //css
+    
+    // await page.locator(usernameLocate).fill("ft@gmaili.com")
+    await page.fill(usernameLocate,"ft@gmaili.com");
+    await page.waitForSelector(usernameLocate);
+    const passwordtext = '123456';
+    let passwordLocate:string;
+    passwordLocate="input[id='loginpassword']" //css
+    await page.type(passwordLocate,passwordtext);
+
+    await page.click("//button[text()='Log in']");
+
+    await expect(page.locator("#logout2")).toBeVisible();
+   
+    // await page.keyboard.press("Tab");
+    // await page.keyboard.insertText('123456');
+
+
+
+  })
+
+})
