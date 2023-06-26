@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
 
 test.describe("Login",()=>{
 
-  test('user shoud log in the system with a right credentials',async({page})=>{
+  test('User should be able to log in the system with right credentials',async({page})=>{
     let usernameLocate : string;
     usernameLocate="#loginusername" //css
     
