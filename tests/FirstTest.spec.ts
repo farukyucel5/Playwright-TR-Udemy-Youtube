@@ -17,10 +17,17 @@ test.describe("Home page",()=>{
      await expect(page.getByText("Cart")).toBeEnabled();
      const cartLocate= page.getByText("Cart");
      await cartLocate.click();
-     await expect(page.getByText("Products")).toBeVisible();
+     let expectedString : string;
+     expectedString="Products"
+     await expect(page.getByText(expectedString)).toBeVisible();
      await page.goBack()
-     
-   });
+     const contactLink=page.getByRole('link', { name: 'Contact' });
+     await expect(contactLink).toBeEnabled()
+     contactLink.click();
+     let contactVerificationString:string;
+     contactVerificationString ="Send message";
+     await expect(page.getByText(contactVerificationString)).toBeVisible();
+    });
    
 
 
