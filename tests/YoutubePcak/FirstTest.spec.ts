@@ -21,7 +21,7 @@ test.describe("Ders1",()=>{
 
 
        await page.locator("button[class='btn btn-primary']").nth(2).click();
-
+       await page.waitForSelector("//a[@id='logout2']")
        await expect(page.locator("//a[@id='logout2']")).toBeVisible();
 
    })

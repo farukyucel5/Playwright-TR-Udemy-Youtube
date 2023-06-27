@@ -23,7 +23,7 @@ test.describe("Login",()=>{
     await page.type(passwordLocate,passwordtext);
 
     await page.click("//button[text()='Log in']");
-
+    await page.waitForSelector("#logout2");
     await expect(page.locator("#logout2")).toBeVisible();
    
     // await page.keyboard.press("Tab");
