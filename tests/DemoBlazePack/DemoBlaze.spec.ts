@@ -51,6 +51,6 @@ test.describe("Home page",()=>{
    
 
 
-})
+});
 
 
