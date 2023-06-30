@@ -20,8 +20,12 @@ test.describe("Login",()=>{
     const passwordtext = '123456';
     let passwordLocate:string;
     passwordLocate="input[id='loginpassword']" //css
+    await page.locator(passwordLocate).focus();
+    await page.waitForTimeout(5000);
     await page.type(passwordLocate,passwordtext);
 
+    await page.locator("//button[text()='Log in']").focus();
+    await page.waitForTimeout(5000);
     await page.click("//button[text()='Log in']");
     await page.waitForSelector("#logout2");
     await expect(page.locator("#logout2")).toBeVisible();

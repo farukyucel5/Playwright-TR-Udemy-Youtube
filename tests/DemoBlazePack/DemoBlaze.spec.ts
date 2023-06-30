@@ -26,8 +26,9 @@ test.describe("Home page",()=>{
      contactLink.click();
      let contactVerificationString:string;
      contactVerificationString ="Send message";
-     await page.locator("xpath=(//button[@class='close'])[1]").click();
      await expect(page.getByText(contactVerificationString)).toBeVisible();
+     await page.locator("xpath=(//button[@class='close'])[1]").click();
+     
      const loginlink= page.getByText("Log in").nth(2);
      await expect(loginlink).toBeEnabled();
      await loginlink.click();
