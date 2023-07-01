@@ -23,7 +23,7 @@ test.describe("Assertions",async()=>{
         await page.locator("//input[@id='name']").fill("Faruk");
         await expect(page.locator("//input[@id='name']")).toHaveValue("Faruk");
         await expect(page.locator("//input[@id='name']")).not.toBeEmpty();
-        await expect(page.locator("//input[@id='name']")).toBeEmpty();
+      //   await expect(page.locator("//input[@id='name']")).toBeEmpty();
 
 
      })
@@ -36,8 +36,8 @@ test.describe("Assertions",async()=>{
       await expect(page.getByText("Book Store Application")).toContainText(" Application");
       await expect(page.getByText("Book Store Application")).toContainText("ion");
       await expect(page.getByText("Book Store Application")).toHaveText("Book Store Application");
-      // await expect(page.getByText("Book Store Application")).toHaveText(" Book Store Application");
-      await expect(page.getByText("Book Store Application")).toHaveText("Store Application");
+      // await expect(page.getByText("Book Store Application")).toHaveText(" Book Store Application"); //hata verecek
+      // await expect(page.getByText("Book Store Application")).toHaveText("Store Application"); // hata verecek
       
 
      })
