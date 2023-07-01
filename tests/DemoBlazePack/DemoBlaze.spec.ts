@@ -43,13 +43,21 @@ test.describe("Home page",()=>{
        await expect(page.getByText("Phones")).toBeEnabled();
 
        await expect(page.getByText("Laptops")).toBeVisible();
+       expect(await page.getByText("Laptops").isEnabled()).toBeTruthy();
        await expect(page.getByText("Laptops")).toBeEnabled();
 
        await expect(page.getByText("Monitors")).toBeVisible();
+       expect(await page.getByText("Monitors").isVisible()).toBeTruthy();
+       expect(await page.getByText("Monitors").isHidden()).toBeFalsy();
        await expect(page.getByText("Monitors")).toBeEnabled();
+       await expect(page.getByText("Get in Touch")).toBeInViewport();
+
+
+
 
     });
-   
+
+  
 
 
 });
