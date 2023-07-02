@@ -7,7 +7,7 @@ test.beforeEach(async({page})=>{
 
 test.describe("Input box",()=>{
    
-    function Xpath(text: string){
+    function Xpath(text: string):string{
         return`//input[@id='${text}']`
     }
 
