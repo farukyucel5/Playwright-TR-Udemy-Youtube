@@ -28,6 +28,17 @@ test.describe("Input box",()=>{
         await page.fill(Xpath("phone"),"123456");
         await expect(page.locator(Xpath("phone"))).toHaveValue("123456");
 
+        await page.getByText("Sunday").focus();
+        await page.waitForTimeout(3000);
+        await expect(page.locator("id=sunday")).toBeFocused();
+        await page.getByText("Sunday").check();
+        await page.getByText("Monday").check();
+        await page.getByText("Tuesday").check();
+
+        expect(0.1 + 0.2).not.toBe(0.3);
+        expect(0.1 + 0.2).toBeCloseTo(0.3);
+
+
     })
 
 
