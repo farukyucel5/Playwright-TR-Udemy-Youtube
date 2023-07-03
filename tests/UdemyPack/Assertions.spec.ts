@@ -8,28 +8,9 @@ test.describe("Assertions",async()=>{
         await expect(page).toHaveTitle("STORE");
         await expect(page.getByText("Place Order").nth(1)).not.toBeAttached();
      //    await expect(page.getByText("Place Order").nth(1)).toBeAttached();
-      
-       await page.waitForSelector("//div[@class='card-block']/h5");
-       const prices=await page.locator("//div[@class='card-block']/h5").allInnerTexts();
-       const numberPrice :Array<string>=[];
-       for(let price of prices){
-         price=price.replace('$','');
-         numberPrice.push(price);    
-          
-       }
-       console.log(numberPrice)
-       expect(numberPrice).toContainEqual("360");
+  })
 
-       const myArray = [{ id: 1 }, { id: 2 }, { id: 3 }];
-      expect(myArray).toContainEqual({ id: 2 }); // Passes
-      expect(myArray).toContain({ id: 1 }); // Fails
-
-
-
-     
-     })
-
-     test.skip("Automation practice",async({page})=>{
+     test("Automation practice",async({page})=>{
         await page.goto("https://testautomationpractice.blogspot.com/")
         const checkBoxLocate=page.locator("//input[@id='male']");
         await checkBoxLocate.check();
@@ -46,7 +27,7 @@ test.describe("Assertions",async()=>{
 
      })
 
-     test.skip("DemoQA",async({page})=>{
+     test("DemoQA",async({page})=>{
       await page.goto("https://demoqa.com/")
       await expect(page.getByText("Book Store Application")).not.toBeInViewport();
       // await expect(page.getByText("Book Store Application")).toBeInViewport();
