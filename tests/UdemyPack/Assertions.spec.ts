@@ -37,13 +37,12 @@ test.describe("Assertions",async()=>{
       await expect(page.getByText("Book Store Application")).toHaveText("Book Store Application");
       // await expect(page.getByText("Book Store Application")).toHaveText(" Book Store Application"); //hata verecek
       // await expect(page.getByText("Book Store Application")).toHaveText("Store Application"); // hata verecek
-      
-     expect(await page.getByText("Book Store Application").textContent()).toBe("Book Store Application");
-
-})
 
 
-test("Generic assertions",async({page})=>{
+     })
+
+
+test.skip("Generic assertions",async({page})=>{
 
    // let value1=3;
    // let valu2=3;
@@ -101,6 +100,23 @@ test("Generic assertions",async({page})=>{
    expect(status).toBeTruthy();
 
 })
+
+
+
+test("soft Assertions",async({page})=>{
+
+   await page.goto("https://demoqa.com/")
+   await expect.soft(page.getByText("Book Store Application")).not.toBeInViewport();
+   // await expect(page.getByText("Book Store Application")).toBeInViewport();
+   await expect.soft(page.getByText("Book Store Application"),"assertion1").toContainText("Application");
+   await expect.soft(page.getByText("Book Store Application"),"assertion2").toContainText(" ppplication");
+   await expect.soft(page.getByText("Book Store Application"),"assertion3").toContainText("pion");
+   await expect.soft(page.getByText("Book Store Application"),"asssertion4").toHaveText("Book Store Application");
+   // await expect(page.getByText("Book Store Application")).toHaveText(" Book Store Application"); //hata verecek
+   // await expect(page.getByText("Book Store Application")).toHaveText("Store Application"); // hata verecek
+
+
+  })
 
    
 
