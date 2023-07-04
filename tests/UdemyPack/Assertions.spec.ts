@@ -2,7 +2,7 @@ import{test,expect} from '@playwright/test';
 
 test.describe("Assertions",async()=>{
 
-    test("Hard assertions",async({page})=>{
+    test.skip("Hard assertions",async({page})=>{
         await page.goto("https://www.demoblaze.com/");
         await expect(page).toHaveURL("https://www.demoblaze.com/");
         await expect(page).toHaveTitle("STORE");
@@ -10,7 +10,7 @@ test.describe("Assertions",async()=>{
      //    await expect(page.getByText("Place Order").nth(1)).toBeAttached();
   })
 
-     test("Automation practice",async({page})=>{
+     test.skip("Automation practice",async({page})=>{
         await page.goto("https://testautomationpractice.blogspot.com/")
         const checkBoxLocate=page.locator("//input[@id='male']");
         await checkBoxLocate.check();
@@ -27,7 +27,7 @@ test.describe("Assertions",async()=>{
 
      })
 
-     test("DemoQA",async({page})=>{
+     test.skip("DemoQA",async({page})=>{
       await page.goto("https://demoqa.com/")
       await expect(page.getByText("Book Store Application")).not.toBeInViewport();
       // await expect(page.getByText("Book Store Application")).toBeInViewport();
@@ -43,8 +43,7 @@ test.describe("Assertions",async()=>{
 
      })
 
-     
-
+   
 
 
 })
