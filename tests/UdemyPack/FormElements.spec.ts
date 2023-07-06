@@ -8,7 +8,7 @@ test.beforeEach(async({page})=>{
 
 test.describe("Form elements",async()=>{
 
-    test("text box",async({page})=>{
+    test("text box and radio button",async({page})=>{
 
         const nameField=page.locator("#name");
         const genderRadioButton=page.locator("#male");
@@ -23,8 +23,32 @@ test.describe("Form elements",async()=>{
         await genderRadioButton2.check();
         await expect(genderRadioButton2).toBeChecked();
 
+    })
+
+    test("CheckBox",async({page})=>{
+    //   const day1=page.getByText("Sunday");
+    //   const day2=page.getByText("Monday");
+    //   const day3=page.getByText("Tuesday");
+
+    //   await day1.check();
+    //   await expect(day1).toBeChecked();
+    //   await day2.check();
+    //   await expect(day2).toBeChecked();
+    //   await day3.check();
+    //   await expect(day3).toBeChecked();
+
+      const checkArray=[page.getByText("Sunday"),page.getByText("Monday"),page.getByText("Tuesday")]
+
+      for(const each of checkArray){
+        await each.check();
+        await expect(each).toBeChecked();
+      }
 
 
+
+     
 
     })
+
+
 })
