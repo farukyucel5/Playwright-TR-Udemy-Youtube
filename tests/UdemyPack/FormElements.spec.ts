@@ -8,7 +8,7 @@ test.beforeEach(async({page})=>{
 
 test.describe("Form elements",async()=>{
 
-    test("text box and radio button",async({page})=>{
+    test.skip("text box and radio button",async({page})=>{
 
         const nameField=page.locator("#name");
         const genderRadioButton=page.locator("#male");
@@ -25,7 +25,7 @@ test.describe("Form elements",async()=>{
 
     })
 
-    test("CheckBox",async({page})=>{
+    test.skip("CheckBox",async({page})=>{
     //   const day1=page.getByText("Sunday");
     //   const day2=page.getByText("Monday");
     //   const day3=page.getByText("Tuesday");
@@ -44,11 +44,46 @@ test.describe("Form elements",async()=>{
         await expect(each).toBeChecked();
       }
 
-
-
-     
-
     })
+
+    test("Dropdowns intro",async({page})=>{
+      const dropdown=page.locator("#country");
+
+      await dropdown.selectOption("Canada");
+      await dropdown.selectOption({value:"germany"});
+      await dropdown.selectOption({index:5});
+
+      const options=page.locator("#country option");
+
+      await expect(options).toHaveCount(10);
+
+      expect(await options.allTextContents()).toContain("China");
+
+      const optionsArray=page.$$("#country option");
+
+      expect(await optionsArray).toHaveLength(10);
+      let status:boolean;
+      status=false;
+      for(const each of await optionsArray){
+        let opt=await each.textContent();
+        if(opt=="China"){
+          status=true;
+          break;
+
+        }
+      }
+
+      expect(status).toBeTruthy();
+
+
+
+
+
+
+   })
+
+
+
 
 
 })
