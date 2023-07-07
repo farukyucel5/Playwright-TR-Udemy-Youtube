@@ -1,12 +1,14 @@
 import{test,expect} from '@playwright/test';
 
 
-test.beforeEach(async({page})=>{
- await page.goto("https://testautomationpractice.blogspot.com/");
 
-})
 
-test.describe("Form elements",async()=>{
+test.describe("Form elements",()=>{
+  test.beforeEach(async({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com/");
+   
+   })
+
 
     test.skip("text box and radio button",async({page})=>{
 
@@ -90,10 +92,45 @@ test.describe("Form elements",async()=>{
 
     })
 
+})
 
 
+test.describe("Dropdowns without select tag",()=>{
 
+   test.beforeEach(async({page})=>{
+       await page.goto("https://www.arabam.com/ikinci-el?days=1");
+
+
+   })
+
+   test("Muti-select without select tag",async({page})=>{
+     const dropdown=page.locator("//span[text()='İl']");
+     await dropdown.click();
+
+     const city1=page.getByText("İstanbul Avrupa");
+     const city2=page.getByText("İstanbul Anadolu");
+
+     await city1.check();
+     await city2.check();
+
+   })
+
+   test("Dropdowns without select",async({page})=>{
+
+    const dropdown=page.getByText("İlan Sahibi");
+    await dropdown.click();
+
+    const option=page.locator("//label[@class='radio']").nth(0);
+    const option1=page.locator("//label[@class='radio']").nth(1);
+    
+    
+    await option.check();
+    await option1.check();
+
+   })
 
 
 
 })
+
+
