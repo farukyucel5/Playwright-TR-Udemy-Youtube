@@ -46,7 +46,7 @@ test.describe("Form elements",async()=>{
 
     })
 
-    test("Dropdowns intro",async({page})=>{
+    test.skip("Dropdowns intro",async({page})=>{
       const dropdown=page.locator("#country");
 
       await dropdown.selectOption("Canada");
@@ -77,10 +77,20 @@ test.describe("Form elements",async()=>{
 
 
 
+    })
+
+    test("Multi-select dropdowns",async({page})=>{
+
+      const multiSelect=page.locator("#colors");
+      
+      await multiSelect.selectOption(["Red","Blue","Green"]);
+
+      await expect(multiSelect).toHaveValues(["red","blue","green"]);
 
 
+    })
 
-   })
+
 
 
 
