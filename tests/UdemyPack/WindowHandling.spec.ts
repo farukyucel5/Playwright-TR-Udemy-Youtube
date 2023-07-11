@@ -2,65 +2,66 @@ import {test,expect} from '@playwright/test';
 
 test.describe("Handling windows",()=>{
 
-   test("New tab",async({page,context})=>{
-     await page.goto("https://demoqa.com/browser-windows");
-     const pagePromise=context.waitForEvent('page');
-     await page.getByText("New Tab").click();
-     const newPage=await pagePromise;
-     await newPage.waitForLoadState();
-     console.log(newPage.url());
-     expect(newPage.url()).toBe("https://demoqa.com/sample");
+    test.beforeEach(async({page})=>{
+      await page.goto("https://demoqa.com/browser-windows");
+    })
 
-     const allPages=context.pages();
+   test.skip("New Tab",async({page})=>{
+    const newTabBtn=page.getByText("New Tab");
+    await newTabBtn.click();
 
-    //  for(const page of allPages){
-    //     const pageUrl=page.url();
-    //     console.log(`The current page url ${pageUrl}`);
-    //     await page.bringToFront();
-    //     await page.waitForTimeout(3000);
-
-
-    //  }
-
-    for(const page of allPages){
-        const pageUrl=page.url();
-        
-        if(pageUrl!=="https://demoqa.com/browser-windows"){
-            //await page.bringToFront();
-            const elementText= await page.getByText("This is a sample page").textContent();
-            expect(elementText).toBe("This is a sample page");
-            await page.close();
-
-        } 
-
-     }
-     await page.close();
-
- 
-    //oluşturulan yeni page nesnesi ismi ile sayfada işlem yapılabilir.
-    // const elementText= await newPage.getByText("This is a sample page").textContent();
-    // expect(elementText).toBe("This is a sample page");
-
-
-    // for(const page of allPages){
-    //     const pageUrl=page.url();
-        
-    //     if(pageUrl!=="https://demoqa.com/browser-windows"){
-    //         await page.bringToFront();
-    //         const elementText= await page.getByText("This is a sample page").textContent();
-    //         expect(elementText).toBe("This is a sample page");
-    //         await page.close();
-    //     }  
-
-    //  }
-
-    //  const browserWin=page.getByText("Browser Windows").nth(0);
-    //  await expect(browserWin).toBeVisible();
-
-
-
-
+    const newTabText=page.getByText("This is a sample page");
+    await expect(newTabText).toBeVisible(); //hatalı kod ! page nesnesi ile yeni açılan tabde işlem yapılamaz
+    
    })
+
+   test.skip("New Tab with context",async({page,context})=>{
+    const newTabBtn=page.getByText("New Tab");
+    
+     
+    const pagePromise=context.waitForEvent('page');
+    await newTabBtn.click();
+    const newPage=await pagePromise;
+    
+    await newPage.waitForLoadState();
+
+    const newTabText=newPage.getByText("This is a sample page");
+    await expect(newTabText).toBeVisible();
+    
+    await page.bringToFront()
+    await page.waitForTimeout(3000);
+    await page.getByText("Elements").click();
+
+    await newPage.bringToFront();
+    expect(newPage.url()).toBe("https://demoqa.com/sample");
+
+})
+
+
+test("New Tab with for loop",async({page,context})=>{
+    const newTabBtn=page.getByText("New Tab");
+    
+     
+    const pagePromise=context.waitForEvent('page');
+    await newTabBtn.click();
+    const newPage=await pagePromise;
+    await newPage.waitForLoadState();
+
+    const allPages=context.pages();
+
+    for(const eachPage of allPages){
+
+        const eachPageUrl=eachPage.url();
+        console.log(`each page url:${eachPageUrl}`);
+    }
+
+   
+
+
+})
+
+
+
 
 
 
