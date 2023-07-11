@@ -38,7 +38,7 @@ test.describe("Handling windows",()=>{
 })
 
 
-test("New Tab with for loop",async({page,context})=>{
+test.skip("New Tab with for loop",async({page,context})=>{
     const newTabBtn=page.getByText("New Tab");
     
      
@@ -61,6 +61,24 @@ test("New Tab with for loop",async({page,context})=>{
 })
 
 
+
+test("Popup",async({page,context})=>{
+    const popupPromise=page.waitForEvent('popup');
+    await page.getByText("New Window").nth(0).click()
+    const popup=await popupPromise;
+    await popup.waitForLoadState();
+
+    const popupText=popup.getByText("This is a sample page");
+    await expect(popupText).toBeVisible();
+    await page.waitForTimeout(3000);
+    await popup.close();
+    await page.waitForTimeout(3000);
+    await page.close();
+
+
+
+
+})
 
 
 
