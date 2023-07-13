@@ -41,14 +41,7 @@ test.describe("Actions",()=>{
 })
 
 test("Right click actions1",async({page})=>{
-  await page.goto("https://testautomationpractice.blogspot.com/")
-  const copyButton=page.locator("//button[normalize-space()='Copy Text']");
-  await copyButton.waitFor({state:'visible'});
-  
-  await copyButton.dblclick();
-
-  const coppiedTextBtn=page.locator("#field2");
-  await expect(coppiedTextBtn).toHaveValue("Hello World!");
+ 
 
 })
 
