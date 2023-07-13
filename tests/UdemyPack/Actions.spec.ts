@@ -26,13 +26,12 @@ test.describe("Actions",()=>{
 
   const pageTwo=await context.newPage();
   await pageTwo.goto("https://testautomationpractice.blogspot.com/")
-  const copyButton=page.locator("//button[normalize-space()='Copy Text']");
-  await copyButton.waitFor({state:'visible'});
+  const copyButton=pageTwo.locator("//button[normalize-space()='Copy Text']");
   
   await copyButton.dblclick();
 
-  const coppiedTextBtn=page.locator("#field2");
-  await expect(coppiedTextBtn).toHaveValue("Hello World!");
+  const coppiedTextBox=pageTwo.locator("#field2");
+  await expect(coppiedTextBox).toHaveValue("Hello World!");
 
 
 
