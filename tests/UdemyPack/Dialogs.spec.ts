@@ -10,10 +10,11 @@ test.describe("Dialogs",()=>{
 
   test("Alert",async({page})=>{
     
-    page.on("dialog",dialog=>{
+    page.on("dialog", dialog=>{
        expect(dialog.type()).toBe("alert");
        expect(dialog.message()).toBe("I am an alert box!");
-      dialog.accept()
+       
+       dialog.accept()
 
     })
 
