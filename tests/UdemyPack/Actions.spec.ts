@@ -40,10 +40,7 @@ test.describe("Actions",()=>{
 
 })
 
-test("Right click actions1",async({page})=>{
- 
 
-})
 
  
 
