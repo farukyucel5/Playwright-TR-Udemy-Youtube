@@ -61,11 +61,37 @@ test("Drag and Drop",async({page})=>{
 
 })
 
+test("Keybord actions",async({page})=>{
+   
+  await page.goto("https://www.ebay.com/");
+  const serachBox=page.getByPlaceholder("Search for anything");
+  
+  await serachBox.fill("phone holder for bike");
+  
+  await page.keyboard.down('Shift');
 
+  for(let i=0;i<'bike'.length; i++){
+    await page.keyboard.press("ArrowLeft");
+    await page.waitForTimeout(1000);
+  }
+  
+  await page.keyboard.up("Shift");
 
- 
+  await page.waitForTimeout(1000);
 
+  await page.keyboard.press("Backspace");
 
+  await page.keyboard.press("c");
+  await page.keyboard.press("a");
+  await page.keyboard.press("r");
 
+  await page.keyboard.press("Control+A");
+  await page.waitForTimeout(1000);
+  await page.keyboard.press("Control+X");
+  await page.waitForTimeout(1000);
+  await page.keyboard.press("Control+V");
+  await page.waitForTimeout(1000);
+  await page.keyboard.press("Enter");
+})
 
 })
