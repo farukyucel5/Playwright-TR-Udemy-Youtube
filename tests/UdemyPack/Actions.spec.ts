@@ -2,7 +2,7 @@ import{test,expect} from '@playwright/test';
 
 test.describe("Actions",()=>{
 
- test.skip("Hover actions",async({page})=>{
+ test("Hover actions",async({page})=>{
    await page.goto("https://www.amazon.com/");
    const helloSignInLink=page.locator("#nav-link-accountList");
    await page.waitForSelector("#nav-link-accountList");
@@ -25,28 +25,23 @@ test.describe("Actions",()=>{
   await expect(rightClickMenu).toBeVisible();
 })
 
-test("Double click actions and multi context running",async({page,context})=>{
-  await page.goto("https://demo.guru99.com/test/simple_context_menu.html");
-
-  page.on('dialog',dialog=>{
-    
-    expect(dialog.message()).toBe("You double clicked me.. Thank You..")
-    dialog.accept();
-
-  })
-
-  const doubleClickElement=page.getByText("Double-Click Me To See Alert");
-  await doubleClickElement.dblclick();
-
+test.only("Double click",async({page,context})=>{ 
+  await page.goto("https://demoqa.com/buttons");
+  const dbClickBtn=page.getByText("Double Click Me");
+  await dbClickBtn.dblclick();
+  const expectedTextElement=page.locator("id=doubleClickMessage");
+  expect(await expectedTextElement.textContent()).toBe("You have done a double click");
 
   const pageTwo=await context.newPage();
   await pageTwo.goto("https://testautomationpractice.blogspot.com/");
-  const copyTextBtn=pageTwo.getByText("Copy Text");
+  const coppyTextBtn=pageTwo.getByText("Copy Text");
+  await coppyTextBtn.dblclick();
 
-  await copyTextBtn.dblclick();
   const coppiedTextBox=pageTwo.locator("#field2");
   expect(await coppiedTextBox.inputValue()).toBe("Hello World!");
-  //await expect(coppiedTextBox).toHaveValue("Hello World!");
+  //await expect(coppiedTextBox).toHaveValue("Hello World!")
+
+
 
 
 })
