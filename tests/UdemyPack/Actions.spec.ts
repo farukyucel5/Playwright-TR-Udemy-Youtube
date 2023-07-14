@@ -59,7 +59,6 @@ test("Drag and Drop",async({page})=>{
 
    expect(droppedText).toBe("Dropped!");
 
-
 })
 
 
