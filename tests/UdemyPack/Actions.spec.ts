@@ -34,6 +34,10 @@ test.only("Double click",async({page,context})=>{
 
   const pageTwo=await context.newPage();
   await pageTwo.goto("https://testautomationpractice.blogspot.com/");
+  await pageTwo.evaluate(() => {
+    window.scrollTo(0, 200);
+  });
+  
   const coppyTextBtn=pageTwo.getByText("Copy Text");
   await coppyTextBtn.dblclick();
 
@@ -41,13 +45,22 @@ test.only("Double click",async({page,context})=>{
   expect(await coppiedTextBox.inputValue()).toBe("Hello World!");
   //await expect(coppiedTextBox).toHaveValue("Hello World!")
 
-
-
-
 })
 
 
+test("Drag and Drop",async({page})=>{
+   await page.goto("https://testautomationpractice.blogspot.com/");
+   const sourceElement=page.getByText("Drag me to my target");
+   const tagetElement=page.locator("#droppable");
 
+   await sourceElement.dragTo(tagetElement);
+
+   const droppedText:string|null=await page.locator("#droppable p").textContent();
+
+   expect(droppedText).toBe("Dropped!");
+
+
+})
 
 
 
