@@ -28,18 +28,43 @@ test("Upload files",async({page,context})=>{
 })
 
 test("Multiple files upload",async({page})=>{
+
+  await page.goto("https://davidwalsh.name/demo/multiple-file-upload.php");
+  const dosyalariSecInput=page.locator("id=filesToUpload");
+  await dosyalariSecInput.setInputFiles(["tests\\UploadFiles\\UploadFile1.pdf","tests\\UploadFiles\\UploadFile2.docx"]);
+
+  let fileNames:string[];
+  fileNames=["UploadFile1.pdf","UploadFile2.docx"];
+
+  const fileArray=page.locator("//ul[@id='fileList']/li");
+
+  for(const fileName of fileNames){
+   expect(await fileArray.allTextContents()).toContain(fileName);
+  }
+
+
+
+})
+
+
+test.only("Downloads",async({page})=>{
+
+  await page.goto("https://demoqa.com/upload-download");
+  // Start waiting for download before clicking. Note no await.
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('link',{name:"Download"}).click();
+  const download = await downloadPromise;
+  // Wait for the download process to complete
+  const dosyaYolu = 'C:\\Users\\faruk\\Downloads\\file3.jpeg';
+  await download.saveAs(dosyaYolu);
+   
+  const fs = require('fs');
   
-    await page.goto("https://davidwalsh.name/demo/multiple-file-upload.php");
-    const dosyalariSecInput=page.locator("id=filesToUpload");
-    await dosyalariSecInput.setInputFiles(["tests\\UploadFiles\\UploadFile1.pdf","tests\\UploadFiles\\UploadFile2.docx"]);
+  
+  expect(fs.existsSync(dosyaYolu)).toBe(true);
+  
 
-    const fileArray=page.locator("//ul[@id='fileList']/li");
-     
-    const fileNames:string[]=["UploadFile1.pdf","UploadFile2.docx"];
-    for(const filename of fileNames){
-      expect(await fileArray.allTextContents()).toContain(filename);
 
-    }
 
 
 })
