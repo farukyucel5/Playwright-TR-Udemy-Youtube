@@ -19,14 +19,28 @@ test("Upload files",async({page,context})=>{
     await uploadFileInput.click();
     const fileUploadInput=pageTwo.locator("id=file-upload");
     await fileUploadInput.setInputFiles("tests\\UploadFiles\\UploadFile2.docx");
-
     const submitBtn=pageTwo.locator("id=pop_upload");
     await submitBtn.click();
 
     const pageTwoUploadFileInput=pageTwo.locator("//*[@*='f15']");
     expect(await pageTwoUploadFileInput.textContent()).toContain("UploadFile2.docx");
 
+})
 
+test("Multiple files upload",async({page})=>{
+  
+    await page.goto("https://davidwalsh.name/demo/multiple-file-upload.php");
+    const dosyalariSecInput=page.locator("id=filesToUpload");
+    await dosyalariSecInput.setInputFiles(["tests\\UploadFiles\\UploadFile1.pdf","tests\\UploadFiles\\UploadFile2.docx"]);
+
+    const fileArray=page.locator("//ul[@id='fileList']/li");
+     
+    const fileNames:string[]=["UploadFile1.pdf","UploadFile2.docx"];
+    for(const filename of fileNames){
+      expect(await fileArray.allTextContents()).toContain(filename);
+
+    }
 
 
 })
+
