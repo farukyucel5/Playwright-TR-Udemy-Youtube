@@ -48,21 +48,22 @@ test("Multiple files upload",async({page})=>{
 
 
 test.only("Downloads",async({page})=>{
+   await page.goto("https://demoqa.com/upload-download");
 
-  await page.goto("https://demoqa.com/upload-download");
-  // Start waiting for download before clicking. Note no await.
-  const downloadPromise = page.waitForEvent('download');
-  await page.getByRole('link',{name:"Download"}).click();
-  const download = await downloadPromise;
-  // Wait for the download process to complete
-  const dosyaYolu = 'C:\\Users\\faruk\\Downloads\\file3.jpeg';
-  await download.saveAs(dosyaYolu);
+   const downloadPromise=page.waitForEvent('download');
+   await page.getByRole('link',{name:"Download"}).click();
+   const dowload=await downloadPromise;
    
-  const fs = require('fs');
-  
-  
-  expect(fs.existsSync(dosyaYolu)).toBe(true);
-  
+   const filePath:string="C:\\Users\\faruk\\Downloads\\downloadImage.jpeg";
+   await dowload.saveAs(filePath)
+
+   const fs= require('fs');
+   expect(fs.existsSync(filePath)).toBe(true);
+
+  // const fs= require('fs');
+
+  // expect(fs.existsSync(await dowload.path())).toBe(true);
+
 
 
 
