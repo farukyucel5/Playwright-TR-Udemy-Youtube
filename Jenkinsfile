@@ -5,7 +5,7 @@ pipeline {
     stage('test') {
       steps {
         sh '''
-          npx playwright test pom.spec.ts
+          npx playwright test tests\\Pom\\tests\\pom.spec.ts
         '''
       }
       
