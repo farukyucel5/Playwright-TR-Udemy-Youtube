@@ -4,9 +4,9 @@ pipeline {
   stages {
     stage('test') {
       steps {
-        sh '''
+        sh 
           npx playwright test
-        '''
+     
       }
       
     }
