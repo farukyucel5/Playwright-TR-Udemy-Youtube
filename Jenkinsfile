@@ -1,4 +1,7 @@
 node {
+   stage('Run nohup') {
+    start /b nohup command
+  }
   stage('Install Playwright') {
     sh 'npm install -g playwright'
   }
