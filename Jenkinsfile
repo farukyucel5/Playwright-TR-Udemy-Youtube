@@ -1,12 +1,9 @@
-pipeline {
-  agent any
-    
-  stages {
-    stage('test') {
-      steps {
-        sh 'npx playwright test'
-      }
-      
-    }
+node {
+  stage('Install Playwright') {
+    sh 'npm install -g playwright'
+  }
+
+  stage('Run Playwright tests') {
+    sh 'npx playwright test pom.spec.ts'
   }
 }
