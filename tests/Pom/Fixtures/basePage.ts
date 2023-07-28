@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test';
 
-import FormPageClass from '../Pages/Formpage';
+import FormPageClass from '../Pages/formpage';
 
 
 type Myfixture={
