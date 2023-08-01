@@ -17,5 +17,12 @@ export default class Home{
 
   }
 
+   loginBtn=()=>this.page.locator("#login2");
+
+   async clickOnTheLoginBtn(){
+    await this.loginBtn().click();
+   }
+
+
 
 }
