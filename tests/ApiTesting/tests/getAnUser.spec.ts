@@ -1,11 +1,11 @@
-import {test,expect} from '@playwright/test'
+import {test,expect, APIRequest, APIResponse} from '@playwright/test'
 
-let response;
-let responseBody;
+
+
 test("get an user's information",async({request})=>{
-
+  let response:APIResponse;
   response=await request.get("https://reqres.in/api/users/2");
-  responseBody=await response.json();
+  let responseBody=await response.json();
   console.log(responseBody);
   expect(response.status()).toBe(200);
   expect(responseBody.data.id).toBe(2);
