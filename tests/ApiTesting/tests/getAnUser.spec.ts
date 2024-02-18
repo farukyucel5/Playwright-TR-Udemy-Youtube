@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test'
 
 let response;
 let responseBody;
-test("get users",async({request})=>{
+test("get an user's information",async({request})=>{
 
   response=await request.get("https://reqres.in/api/users/2");
   responseBody=await response.json();
